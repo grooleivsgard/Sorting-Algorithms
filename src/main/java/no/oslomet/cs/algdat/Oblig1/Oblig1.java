@@ -14,6 +14,8 @@ public class Oblig1 {
 
     public static int ombyttinger(int[] a) {
         throw new UnsupportedOperationException();
+        // Jenny
+        
     }
 
     ///// Oppgave 2 //////////////////////////////////////
