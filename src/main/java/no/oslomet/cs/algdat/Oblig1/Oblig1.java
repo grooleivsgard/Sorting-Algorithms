@@ -3,17 +3,67 @@ package no.oslomet.cs.algdat.Oblig1;
 ////// Løsningsforslag Oblig 1 ////////////////////////
 
 import java.lang.UnsupportedOperationException;
+import java.util.Arrays;
+import java.util.NoSuchElementException;
 
 public class Oblig1 {
     private Oblig1() {}
 
+
     ///// Oppgave 1 //////////////////////////////////////
     public static int maks(int[] a) {
-        throw new UnsupportedOperationException();
-    }
+
+        //må lages
+        //throw new UnsupportedOperationException();
+        if(a.length <= 0){
+            throw new NoSuchElementException();
+        }
+        //Bruker to for-løkker
+
+        // (1) Ytre løkke sorterer ett tall per gjennomgang
+        for(int i = 0; i < a.length-1; i++){
+            // (2) Indre løkke bytter om verdiene på posisjonene
+            for(int j = 0; j < a.length-1; j++) {
+
+                //sjekker om en verdi er større enn en verdi en plass mot høyre
+                if (a[j] > a[j + 1]) {
+                    //System.out.println("Inversjon! Bytter plass på " + j + " og " + (j-1) );
+                    int maks = a[j];
+                    a[j] = a[j + 1];
+                    a[j + 1] = maks;
+                }
+            }
+
+        }//MANGLER SJEKK om last_value faktisk er maks tallet
+        return a[a.length-1];
+
+        }
+
 
     public static int ombyttinger(int[] a) {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+
+        int teller = 0;
+
+        for(int i = 0; i < a.length-1; i++){
+
+            // (2) Indre løkke bytter om verdiene på posisjonene
+            for(int j = 0; j < a.length-1; j++) {
+
+                // (3) Dersom det er en ombytting økes teller
+                if (a[j] > a[j + 1]) {
+                    //System.out.println("Inversj2on! Bytter plass på " + j + " og " + (j-1) );
+                    int temp = a[j];
+                    a[j] = a[j + 1];
+                    a[j + 1] = temp;
+                    teller++;
+
+                }
+
+            }
+
+        } return teller;
+
     }
 
     ///// Oppgave 2 //////////////////////////////////////
