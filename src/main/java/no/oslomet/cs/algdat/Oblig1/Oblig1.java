@@ -110,7 +110,28 @@ public class Oblig1 {
 
     ///// Oppgave 4 //////////////////////////////////////
     public static void delsortering(int[] a) {
-        throw new UnsupportedOperationException();
+        /**
+         * Lag metoden public static void delsortering(int[] a). Den skal dele
+         * parametertabellen a i to sorterte deler. Venstre del skal inneholde oddetallene sortert og
+         * høyre del partallene sortert.
+         */
+        int left = 0; //oddetall
+        int right = a.length-1; //partall
+
+        for(int i = 0; i < a.length; i++){
+            while(a[left] % 2 == 1){
+                left++;
+            }
+            while(a[right] % 2 == 0){
+                right--;
+            }
+            if(left < right){
+                int temp = a[left];
+                a[left] = a[right];
+                a[right] = temp;
+            }
+        }
+
     }
 
     ///// Oppgave 5 //////////////////////////////////////
