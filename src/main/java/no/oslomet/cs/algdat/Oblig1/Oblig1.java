@@ -127,29 +127,53 @@ public class Oblig1 {
         if(a.length <= 1){
             return;
         }
+
         //Bruker en liknende rotasjonsmetode 1.3.13 d) som beskrevet i kompendiet i avsnitt 1.3.13,
         // "Forskyvninger og rotasjoner".
+
         // (1) Oppretter en hjelpetabell
         char [] b = Arrays.copyOfRange(a, a.length - 1, a.length);
 
-        // (2) Oppretter variabel for antall plasser tabellen skal forsvyes, i dette
-        // tilfelle 1.
-        int d = 1;
 
-        //(3) For-løkke forskyver, fra venstre, alle verdiene en plass mot høyre.
-        for (int i = a.length - d; i >= d; i--){
-            a[i] = a[i - d];
+        //(2) For-løkke forskyver alle verdiene en plass mot høyre.
+        for (int i = a.length - 1; i >= 1; i--){
+            a[i] = a[i - 1];
         }
 
-        // (4) Kopierer verdi fra indeks 0 i [] b til indeks 1 i [] a.
-        System.arraycopy(b, 0, a, 0, d);
+        // (3) Kopierer verdi fra indeks 0 i [] b til indeks 1 i [] a.
+        System.arraycopy(b, 0, a, 0, 1);
         System.out.println("Array etter 1 flytt" + Arrays.toString(a));
     }
 
     ///// Oppgave 6 //////////////////////////////////////
     public static void rotasjon(char[] a, int k) {
-        throw new UnsupportedOperationException();
+        /**
+         * Lag
+         * metoden public static void rotasjon(char[] a, int k) der k er et vilkårlig heltall.
+         * Hvis k = 1, skal metoden ha samme effekt som metoden i Oppgave 5. Hvis k er negativ, skal
+         * rotasjonen gå motsatt vei. En rotasjon i en tom tabell eller i en tabell med nøyaktig ett element er
+         * ingen feilsituasjon. Men rotasjonen vil da ikke endre noe. Det er ingen grense på størrelsen til k.
+         * Målet er å gjøre metoden så effektiv som mulig.
+         */
+
+        //Dersom tabellen inneholder 1 verdi eller er tom, skal tabellen returneres slik den er uten å endres.
+
+        //Samme metode som i oppg. 5 ble foretrukket for å forskyve tabellen,
+        // men det er viktig å bemerke at denne vil være mest effektiv hvis k er liten i forhold til a.length.
+
+        // (1) Oppretter en hjelpetabell
+        char [] b = Arrays.copyOfRange(a, a.length - k, a.length);
+
+        //(2) For-løkke forskyver alle verdiene en plass mot høyre.
+       for (int i = a.length - k; i >= k; i--){
+                a[i] = a[i - k];
+            }
+
+        // (3) Kopierer forflyttede verdier til rett plass i [] a.
+        System.arraycopy(b, 0, a, 0, k);
+        System.out.println("Array etter" + k + "flytt" + Arrays.toString(a));
     }
+
 
     ///// Oppgave 7 //////////////////////////////////////
     /// 7a)
