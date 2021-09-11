@@ -122,9 +122,13 @@ public class Oblig1 {
          * rotasjonen vil da ikke endre noe.
          */
 
+
+        //Dersom tabellen inneholder 1 verdi eller er tom, skal tabellen returneres slik den er uten å endres.
+        if(a.length <= 1){
+            return;
+        }
         //Bruker en liknende rotasjonsmetode 1.3.13 d) som beskrevet i kompendiet i avsnitt 1.3.13,
         // "Forskyvninger og rotasjoner".
-
         // (1) Oppretter en hjelpetabell
         char [] b = Arrays.copyOfRange(a, a.length - 1, a.length);
 
