@@ -16,34 +16,26 @@ public class Oblig1 {
         if(a.length <= 0){
             throw new NoSuchElementException();
         }
-        //Bruker to for-løkker, som vist i forelesning for Bubble Sort 07.09.2021
+        //Bruker en for-løkke, som vist i forelesning for Bubble Sort 07.09.2021
 
-        // (1) Ytre løkke sorterer ett tall per gjennomgang, starter på indeks 0 slik at tabellen
+        // (1) Løkken sorterer ett tall per gjennomgang, starter på indeks 0 slik at tabellen
         // blir sortert fra venstre til høyre.
-
         for(int i = 0; i < a.length-1; i++){
-            // (2) Indre løkke bytter om verdiene på posisjonene
-            for(int j = 0; j < a.length-1; j++) {
-
-                //sjekker om en verdi er større enn en verdi en plass mot høyre
-                if (a[j] > a[j + 1]) {
-                    //System.out.println("Inversjon! Bytter plass på " + j + " og " + (j-1) );
-                    int maks = a[j];
-                    a[j] = a[j + 1];
-                    a[j + 1] = maks;
-                }
+                //(2) Sjekker om en verdi er større enn en verdi en plass mot høyre, og bytter isåfall plass.
+                if (a[i] > a[i + 1]) {
+                    int maks = a[i];
+                    a[i] = a[i + 1];
+                    a[i + 1] = maks;
             }
 
-        }//MANGLER SJEKK om last_value faktisk er maks tallet
+        }
+        //(3) Returnerer siste verdien i tabellen, som også skal være det høyeste tallet.
         return a[a.length-1];
 
         }
 
 
     public static int ombyttinger(int[] a) {
-
-        //tar inn et array som allerede er sortert - hvordan få inn et usortert int [] a?
-
         /**
          * Det blir flest ombyttinger dersom en permutasjon av tallene 1 til N er synkende fra venstre til høyre
          * Dermed vil det bli en ombytting for hver økning av indeksen.
@@ -55,24 +47,22 @@ public class Oblig1 {
          *
          */
 
+        //(1) Initialiserer en teller som skal telle opp alle ombyttinger
         int teller = 0;
 
-        //regn ut gjennomsnitt av ombyttinger i UnitTest
-        // int gjennomsnitt = teller / a.length;
-
-        // Bruker liknende for-løkke som i maks(), med ytre og indre løkke.
+        // (2) Bruker liknende for-løkke som i maks() for å flytte største tallet mot høyre.
         for(int i = 0; i < a.length-1; i++){
-            for(int j = 0; j < a.length-1; j++) {
-
-                // Dersom en ombytting blir utført, økes teller.
-                if (a[j] > a[j + 1]) {
-                    int temp = a[j];
-                    a[j] = a[j + 1];
-                    a[j + 1] = temp;
+            //(3) Sjekker om en verdi er større enn en verdi en plass mot høyre. Dersom dette er
+            // tilfelle bytter verdiene plass, og teller økes med 1.
+                if (a[i] > a[i + 1]) {
+                    int temp = a[i];
+                    a[i] = a[i + 1];
+                    a[i + 1] = temp;
                     teller++;
-                }
             }
-        } return teller;
+        }
+        //(4) Returnerer teller som inneholder antall ombyttinger i arrayet.
+        return teller;
     }
 
     ///// Oppgave 2 //////////////////////////////////////
