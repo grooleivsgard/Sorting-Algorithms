@@ -67,26 +67,26 @@ public class Oblig1 {
 
     ///// Oppgave 2 //////////////////////////////////////
     public static int antallUlikeSortert(int[] a) {
-        // throw new UnsupportedOperationException(); denne exeption fjernes når metoden ikke lenger er tom.
-        // Jenny
-        /**
-         * Oppgave 2: Antall ulike (sortert)
-         * Lag metoden public static int antallUlikeSortert(int[] a). Hvis a ikke er sortert
-         * stigende, skal det kastes en IllegalStateException (med en passende tekst). Tabellen a
-         * kan ha like verdier. Metoden skal returnere antallet forskjellige verdier i a. Hvis f.eks. a
-         * inneholder 3, 3, 4, 5, 5, 6, 7, 7, 7 og 8, skal metoden returnere 6 siden det er 6 forskjellige
-         * verdier. Metoden skal ikke endre noe på tabellens innhold. Pass på at hvis tabellen er tom
-         * (har lengde 0), skal metoden returnere 0 siden det er 0 forskjellige verdier i en tom tabell.
-         * Med andre ord er ikke en tom tabell en feilsituasjon.
-         */
-        int teller = 0;
 
-        for (int i = 1; i < a.length; ++i) {
+        /**
+         * Fordi tallene i tabellen må inneholde tall i stigende rekkefølge vil funksjonen kun telle
+         * dersom tallet før er mindre. Teller starter på 1 fordi funksjonen starter sammenlikningen fra
+         * det 2. tallet i rekken.
+         */
+
+        // Oppretter en teller for å telle antall ulike tall.
+        int teller = 1;
+
+        // Lager en for-løkke som går igjennom tabellen.
+        for (int i = 0; i < a.length -1; ++i) {
+            // Hvis tabellen er tom vil teller returnere 0.
             if (a.length == 0) {
                 teller = 0;
-            } else if (a[i] - 1 < a[i]) {
+            // Hvis tabellen ikk er sortert stigende vil det bli sendt en feilmelding.
+            } else if (a[i] > a[i+1]) {
                 throw new IllegalStateException("Tabelllen er ikke sortert stigende.");
-            } else if (a[i] -1 != a[i] && a[i] - 1 >= a[i]){
+            // Hvis tallet før er mindre enn tallet etter vil teller øke med 1.
+            } else if (a[i] < a[i+1]){ //
                 teller ++;
             }
         }
@@ -95,7 +95,19 @@ public class Oblig1 {
 
     ///// Oppgave 3 //////////////////////////////////////
     public static int antallUlikeUsortert(int[] a) {
-        throw new UnsupportedOperationException();
+
+        // Oppretter en teller for å telle antall ulike tall.
+        int teller = 1;
+
+        // Lager en for-løkke som går igjennom tabellen.
+        for (int i = 0; i < a.length -1; ++i) {
+            // Hvis tabellen er tom vil teller returnere 0.
+            if (a.length == 0) {
+                teller = 0;
+            }
+            // KODE MANGLER HER FOR Å FULLFØRE TELLINGEN.
+        }
+        return teller;
     }
 
     ///// Oppgave 4 //////////////////////////////////////
