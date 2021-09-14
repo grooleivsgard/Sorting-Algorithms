@@ -5,6 +5,7 @@ package no.oslomet.cs.algdat.Oblig1;
 import java.lang.UnsupportedOperationException;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
+import java.util.Random;
 
 public class Oblig1 {
     private Oblig1() {}
@@ -13,6 +14,7 @@ public class Oblig1 {
     ///// Oppgave 1 //////////////////////////////////////
     public static int maks(int[] a) {
 
+        //
         if(a.length <= 0){
             throw new NoSuchElementException();
         }
@@ -37,13 +39,16 @@ public class Oblig1 {
 
     public static int ombyttinger(int[] a) {
         /**
+         * Når blir det flest ombyttinger?
          * Det blir flest ombyttinger dersom en permutasjon av tallene 1 til N er synkende fra venstre til høyre
          * Dermed vil det bli en ombytting for hver økning av indeksen.
          *
+         * Når blir det færrest?
          * Det blir færrest ombyttinger dersom en permutasjon av tallene fra 1 til N er stigende fra venstre til høyre,
          * fordi tallene allerede vil være sortert og det blir dermed ikke behov for mange ombyttinger.
          *
-         * I gjennomsnitt vil det være H(n) = log(n) + 0,577 ombyttinger, hvor n = a.length.
+         * Hvor mange blir det i gjennomsnitt?
+         * Etter å ha kjørt metoden randPerm() gjennom ombyttinger 30 ganger, ble det i gjennomsnitt ... 
          *
          */
 
@@ -61,9 +66,10 @@ public class Oblig1 {
                     teller++;
             }
         }
-        //(4) Returnerer teller som inneholder antall ombyttinger i arrayet.
+        //(4) Returnerer teller som inneholder antall ombyttinger gjennom arrayet.
         return teller;
     }
+
 
     ///// Oppgave 2 //////////////////////////////////////
     public static int antallUlikeSortert(int[] a) {
@@ -111,90 +117,150 @@ public class Oblig1 {
     }
 
     ///// Oppgave 4 //////////////////////////////////////
-    public static void delsortering(int[] a) {
-        /**
-         * Lag metoden public static void delsortering(int[] a). Den skal dele
-         * parametertabellen a i to sorterte deler. Venstre del skal inneholde oddetallene sortert og
-         * høyre del partallene sortert.
-         */
-        int left = 0; //oddetall
-        int right = a.length-1; //partall
 
-        for(int i = 0; i < a.length; i++){
-            while(a[left] % 2 == 1){
-                left++;
+
+    //Bruker metoden bytt() fra Programkode 1.1.8 d) i kompendiet.
+
+    public static void bytt(int[] a, int i, int j)
+    {
+        int temp = a[i]; a[i] = a[j]; a[j] = temp;
+    }
+
+    public static void delsortering(int[] a) {
+
+        int left = 0; //venstresiden skal inneholde oddetall
+        int right = a.length-1; //høyresiden skal inneholde partall
+
+        // (1) Sjekker om arrayet kun er partall, dersom dette er tilfelle, sorter hele arrayet.
+        if(partall(a)){
+            Arrays.sort(a);
+
+            // (2) Sjekker om arrayet kun er partall, dersom dette er tilfelle, sorter hele arrayet.
+        } else if(oddetall(a)){
+            Arrays.sort(a);
+
+            // (3) Array inneholder både partall og oddetall
+        } else {
+
+            // (4) Setter opp for-løkke for å sortere arrayet etter oddetall og partall.
+            for(int i = 0; i < a.length-1; i++){
+
+                // (5) Hvis venstrepeker er på et oddetall, flytt mot høyre.
+                while(a[left] % 2 != 0){
+                    left++;
+                }
+                // (5) Hvis høyrepeker er på et partall, flytt mot venstre.
+                while(a[right] % 2 == 0){
+                    right--;
+                }
+                // (6) Hvis venstrepeker er mindre enn høyrepeker, kall på metoden bytt() som sorterer om tallene.
+                if(left < right){
+                    bytt(a, left, right);
+                }
             }
-            while(a[right] % 2 == 0){
-                right--;
-            }
-            if(left < right){
-                int temp = a[left];
-                a[left] = a[right];
-                a[right] = temp;
+
+            // (7) Sorter oddetall, fra indeks 0 til og med venstrepeker.
+            Arrays.sort(a, 0, left);
+
+            // (8) Sorter partall, fra venstrepeker til og med enden av array.
+            Arrays.sort(a, left, a.length);
+        }
+
+    }
+
+    public static boolean partall (int [] a){
+
+        boolean partall = true;
+
+        // (1) Sjekker om det finnes oddetall i arrayet, isåfall sett partall til false og returner false.
+        // Hvis ikke, returner true.
+        for(int j : a){
+            if(j % 2 != 0){
+                partall = false;
+                break;
             }
         }
+        return partall;
+    }
+
+    public static boolean oddetall(int [] a){
+
+        boolean oddetall = true;
+
+        // (1) Sjekker om det finnes partall i arrayet, isåfall sett oddetall til false og returner false.
+        // Hvis ikke, returner true.
+        for(int j : a){
+            if(j % 2 == 0){
+                oddetall = false;
+                break;
+            }
+        } return oddetall;
 
     }
 
     ///// Oppgave 5 //////////////////////////////////////
     public static void rotasjon(char[] a) {
-        /**
-         * Lag metoden
-         * public static void rotasjon(char[] a). Den skal «rotere» innholdet i tabellen a én enhet.
-         * En rotasjon i en tom tabell eller i en tabell med nøyaktig ett element er ingen feilsituasjon. Men
-         * rotasjonen vil da ikke endre noe.
-         */
-
-
-        //Dersom tabellen inneholder 1 verdi eller er tom, skal tabellen returneres slik den er uten å endres.
-        if(a.length <= 1){
-            return;
-        }
 
         //Bruker en liknende rotasjonsmetode 1.3.13 d) som beskrevet i kompendiet i avsnitt 1.3.13,
         // "Forskyvninger og rotasjoner".
 
-        // (1) Oppretter en hjelpetabell
+        //(1) Dersom tabellen inneholder 1 verdi eller er tom, skal tabellen returneres slik den er uten å endres.
+        if(a.length <= 1){
+            return;
+        }
+
+        // (2) Oppretter en hjelpetabell
         char [] b = Arrays.copyOfRange(a, a.length - 1, a.length);
 
 
-        //(2) For-løkke forskyver alle verdiene en plass mot høyre.
+        //(3) For-løkke forskyver alle verdiene en plass mot høyre.
         for (int i = a.length - 1; i >= 1; i--){
             a[i] = a[i - 1];
         }
 
-        // (3) Kopierer verdi fra indeks 0 i [] b til indeks 1 i [] a.
+        // (4) Kopierer verdi fra indeks 0 i [] b til indeks 1 i [] a.
         System.arraycopy(b, 0, a, 0, 1);
-        System.out.println("Array etter 1 flytt" + Arrays.toString(a));
     }
 
     ///// Oppgave 6 //////////////////////////////////////
+
+    // Euklids algoritme
+    public static int gcd(int a, int b)
+    {
+        return b == 0 ? a : gcd(b, a % b);
+    }
+
     public static void rotasjon(char[] a, int k) {
-        /**
-         * Lag
-         * metoden public static void rotasjon(char[] a, int k) der k er et vilkårlig heltall.
-         * Hvis k = 1, skal metoden ha samme effekt som metoden i Oppgave 5. Hvis k er negativ, skal
-         * rotasjonen gå motsatt vei. En rotasjon i en tom tabell eller i en tabell med nøyaktig ett element er
-         * ingen feilsituasjon. Men rotasjonen vil da ikke endre noe. Det er ingen grense på størrelsen til k.
-         * Målet er å gjøre metoden så effektiv som mulig.
-         */
 
-        //Dersom tabellen inneholder 1 verdi eller er tom, skal tabellen returneres slik den er uten å endres.
+        // Bruker Programkode 1.3.13 i) fra kompendiet i Kap 1.3. Dette er en av tre versjoner som kan bli brukt for å
+        // rotere et array. Denne versjonen, hvor Euklids algoritme blir brukt,
+        // ble valgt for å oppnå den høyeste effektiviteten.
 
-        //Samme metode som i oppg. 5 ble foretrukket for å forskyve tabellen,
-        // men det er viktig å bemerke at denne vil være mest effektiv hvis k er liten i forhold til a.length.
+        //(1) Setter a.length til n for bedre lesbarhet
+        int n = a.length;
 
-        // (1) Oppretter en hjelpetabell
-        char [] b = Arrays.copyOfRange(a, a.length - k, a.length);
+        // (2) Returnerer koden "as is" dersom arrayet inneholder mindre enn 2 verdier.
+        if (n < 2) return;
 
-        //(2) For-løkke forskyver alle verdiene en plass mot høyre.
-       for (int i = a.length - k; i >= k; i--){
-                a[i] = a[i - k];
+        // (3) Dersom k er negativ, flytt motsatt vei
+        if ((k %= n) < 0) k += n;
+
+        // (4) Bruker Euklids algoritme for å finne største felles divisor mellom a.length og k.
+        int s = gcd(n, k);
+
+        //(5) Bruker lignende forløkke som i Programkode 1.3.13 i).
+        for (int i = 0; i < s; i++)
+        {
+            char verdi = a[i];
+
+            for (int j = i - k, h = i; j != i; j -= k)
+            {
+                if (j < 0) j += n;
+                a[h] = a[j]; h = j;
             }
 
-        // (3) Kopierer forflyttede verdier til rett plass i [] a.
-        System.arraycopy(b, 0, a, 0, k);
-        System.out.println("Array etter" + k + "flytt" + Arrays.toString(a));
+            a[i + k] = verdi;
+        }
     }
 
 
