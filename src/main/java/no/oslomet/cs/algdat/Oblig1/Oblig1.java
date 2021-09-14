@@ -105,15 +105,20 @@ public class Oblig1 {
         // Oppretter en teller for å telle antall ulike tall.
         int teller = 1;
 
+        // Hvis tabellen er tom vil teller returnere 0.
+        if (a.length == 0) teller = 0;
+
         // Lager en for-løkke som går igjennom tabellen.
         for (int i = 0; i < a.length -1; ++i) {
-            // Hvis tabellen er tom vil teller returnere 0.
-            if (a.length == 0) {
-                teller = 0;
+            int j = a[i +1];
+
+            // sjekker om verdi til j og i er like.
+            if (a[j] != a[i]) {
+                teller ++;
             }
-            // KODE MANGLER HER FOR Å FULLFØRE TELLINGEN.
         }
         return teller;
+        // Får fiel svar. Må oppdateres.
     }
 
     ///// Oppgave 4 //////////////////////////////////////
