@@ -2,6 +2,7 @@ package no.oslomet.cs.algdat.Oblig1;
 
 ////// Løsningsforslag Oblig 1 ////////////////////////
 
+import javax.imageio.ImageReader;
 import java.lang.UnsupportedOperationException;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
@@ -83,16 +84,20 @@ public class Oblig1 {
         // Oppretter en teller for å telle antall ulike tall.
         int teller = 1;
 
-        // Lager en for-løkke som går igjennom tabellen.
-        for (int i = 0; i < a.length -1; ++i) {
+        if (a.length == 0) {
+            teller = 0;
             // Hvis tabellen er tom vil teller returnere 0.
-            if (a.length == 0) {
-                teller = 0;
-            // Hvis tabellen ikk er sortert stigende vil det bli sendt en feilmelding.
-            } else if (a[i] > a[i+1]) {
+        }
+
+        // Lager en for-løkke som går igjennom tabellen.
+        for (int i = 0; i < a.length -1; i++) {
+
+             if (a[i] > a[i+1]) {
+                // Hvis tabellen ikke er sortert stigende, vil man få en feilmelding.
                 throw new IllegalStateException("Tabelllen er ikke sortert stigende.");
+
             // Hvis tallet før er mindre enn tallet etter vil teller øke med 1.
-            } else if (a[i] < a[i+1]){ //
+            } else if (a[i] < a[i+1]){
                 teller ++;
             }
         }
@@ -103,22 +108,28 @@ public class Oblig1 {
     public static int antallUlikeUsortert(int[] a) {
 
         // Oppretter en teller for å telle antall ulike tall.
-        int teller = 1;
+        int teller = 0;
 
         // Hvis tabellen er tom vil teller returnere 0.
-        if (a.length == 0) teller = 0;
+        if (a.length == 0) {
+            return teller;
+        }
 
         // Lager en for-løkke som går igjennom tabellen.
-        for (int i = 0; i < a.length -1; ++i) {
-            int j = a[i +1];
+        for (int i = 0; i < a.length; i++) {
+            int markor = 0;
 
-            // sjekker om verdi til j og i er like.
-            if (a[j] != a[i]) {
+            for (int j = 0; j < i; j++) {
+                if (a[i] == a[j]) {
+                    markor = 1;
+                    break;
+                }
+            }
+            if (markor == 0) {
                 teller ++;
             }
         }
         return teller;
-        // Får fiel svar. Må oppdateres.
     }
 
     ///// Oppgave 4 //////////////////////////////////////
@@ -272,7 +283,18 @@ public class Oblig1 {
     ///// Oppgave 7 //////////////////////////////////////
     /// 7a)
     public static String flett(String s, String t) {
-        throw new UnsupportedOperationException();
+        // Bruker løsningsforslag til oppgave 1a) i 1.3.11 i kompendiet
+
+        //
+        int k = Math.min(s.length(), t.length());
+        StringBuilder m = new StringBuilder();
+
+        for (int i = 0; i < k; i++) {
+            m.append(s.charAt(i)).append(t.charAt(i));
+        }
+
+        m.append(s.substring(k)).append(t.substring(k));
+        return m.toString();
     }
 
     /// 7b)
