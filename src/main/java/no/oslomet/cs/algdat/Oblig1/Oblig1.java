@@ -49,8 +49,7 @@ public class Oblig1 {
          * fordi tallene allerede vil være sortert og det blir dermed ikke behov for mange ombyttinger.
          *
          * Hvor mange blir det i gjennomsnitt?
-         * Etter å ha kjørt metoden randPerm() gjennom ombyttinger 30 ganger, ble det i gjennomsnitt ... 
-         *
+         * Etter å ha kjørt metoden randPerm() gjennom ombyttinger 30 ganger, ble det i gjennomsnitt ...
          */
 
         //(1) Initialiserer en teller som skal telle opp alle ombyttinger
@@ -81,7 +80,8 @@ public class Oblig1 {
          * det 2. tallet i rekken.
          */
 
-        // Oppretter en teller for å telle antall ulike tall.
+        // Oppretter en teller for å telle antall ulike tall. Teller starter på 1 fordi indeks 0 telles ved først
+        // sammenlikning i for-løkken under.
         int teller = 1;
 
         if (a.length == 0) {
@@ -89,14 +89,14 @@ public class Oblig1 {
             // Hvis tabellen er tom vil teller returnere 0.
         }
 
-        // Lager en for-løkke som går igjennom tabellen.
+        // Lager en for-løkke som går igjennom tabellen en gang for hver indeks.
         for (int i = 0; i < a.length -1; i++) {
 
              if (a[i] > a[i+1]) {
                 // Hvis tabellen ikke er sortert stigende, vil man få en feilmelding.
                 throw new IllegalStateException("Tabelllen er ikke sortert stigende.");
 
-            // Hvis tallet før er mindre enn tallet etter vil teller øke med 1.
+            // Kun hvis tallet før er mindre enn tallet etter vil teller øke med 1.
             } else if (a[i] < a[i+1]){
                 teller ++;
             }
@@ -107,21 +107,28 @@ public class Oblig1 {
     ///// Oppgave 3 //////////////////////////////////////
     public static int antallUlikeUsortert(int[] a) {
 
-        // Oppretter en teller for å telle antall ulike tall.
+        /* Oppretter en teller for å telle antall ulike tall. Teller starter på 0 i motsetning til i oppgave 1.
+           I motsettning til oppgave 2 er teller 0 fordi vi kjører en løkke inni en løkke for å sammenlikne tall,
+           uavhengig av rekkefølge på tallene.
+         */
         int teller = 0;
 
-        // Hvis tabellen er tom vil teller returnere 0.
+        // Hvis tabellen er tom vil teller returnere teller som er satt til 0.
         if (a.length == 0) {
             return teller;
         }
 
-        // Lager en for-løkke som går igjennom tabellen.
+        // Lager en for-løkke som går igjennom tabellen en gang.
         for (int i = 0; i < a.length; i++) {
+
+            // oppretter en markør som registrer om noen tall i tabellen er like.
             int markor = 0;
 
+            // En for løkke inni for-løkke som sammenlikner verdi på i og j.
             for (int j = 0; j < i; j++) {
                 if (a[i] == a[j]) {
                     markor = 1;
+                    // Går ut av if-setningen hvis condition er sann.
                     break;
                 }
             }
@@ -283,23 +290,53 @@ public class Oblig1 {
     ///// Oppgave 7 //////////////////////////////////////
     /// 7a)
     public static String flett(String s, String t) {
-        // Bruker løsningsforslag til oppgave 1a) i 1.3.11 i kompendiet
+        // Bruker løsningsforslag til oppgave 1b) i 1.3.11 i kompendiet
 
-        //
+        // Finner den tegnstrengen som er kortest
         int k = Math.min(s.length(), t.length());
+
+        // Oppretter en ny tabell som foreløpig er tom.
         StringBuilder m = new StringBuilder();
 
+        // Går igjennom s og t så lenge den er mindre enn den minste tegnstrengen.
         for (int i = 0; i < k; i++) {
+            // legger til annenhver s og t sin bokstav for hver indeks i tegnstrengene (fletting)
             m.append(s.charAt(i)).append(t.charAt(i));
         }
-
+        // Legger så til resterene tegn som er "til overis i den lengste tegnstrengen.
         m.append(s.substring(k)).append(t.substring(k));
         return m.toString();
     }
 
     /// 7b)
     public static String flett(String... s) {
-        throw new UnsupportedOperationException();
+        // Teller totalt antall tegn i tegnstrengene (8).
+        int totalCharacters = 0;
+
+        // Teller igjennom "ordene" til s.
+        for (int i = 0; i < s.length; i++) {
+
+            // Finner hvor mange teng som totalt er i s (28).
+            for (int j = 0; j < s[i].length(); j++) {
+                totalCharacters++;
+            }
+        }
+
+        // Initialiserer en tom tegnstreng.
+        String out = "";
+
+        // Går igjennom alle tegnene i s.
+        for (int i = 0; i < totalCharacters; i++) {
+
+            // For hvert tegn den går igjennom i hver tegnstreng, så legger den det til i out.
+            for (int j = 0; j < s.length; j++) {
+
+                if (i < s[j].length()) {
+                    out += s[j].charAt(i);
+                }
+            }
+        }
+        return out;
     }
 
     ///// Oppgave 8 //////////////////////////////////////
