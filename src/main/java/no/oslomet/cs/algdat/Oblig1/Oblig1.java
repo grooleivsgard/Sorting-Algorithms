@@ -341,7 +341,59 @@ public class Oblig1 {
 
     ///// Oppgave 8 //////////////////////////////////////
     public static int[] indekssortering(int[] a) {
-        throw new UnsupportedOperationException();
+        // throw new UnsupportedOperationException();
+
+        // Hvis tabellen er tom vil teller returnere a uten noen endringer.
+        if (a.length == 0) {
+            return a;
+        }
+
+        // Hvis tabellen inneholder kun 1 verdi returneres kun en verdi.
+        if (a.length == 1) {
+            return new int[]{0};
+        }
+
+        // Kopierer tabellen i a.
+        int[] kopi = a.clone();
+
+        // Oppretter et ny tabell med samme lengde som a, foreløpig med kun verdi 0.
+        int[] indeks_a = new int[a.length];
+
+        // Oppretter så en til tabell som er en ny kopi av a for å finne største verdi (16).
+        int storste_verdi = maks(a.clone());
+
+        // Setter minste verdi til å være største verdi (16).
+        int minste_verdi = storste_verdi;
+
+        // Minste verdi sin indeks er satt til 0.
+        int minste_indeks = 0;
+
+        // Teller igjennom tabell indeks_a.
+        for (int i = 0; i < indeks_a.length; i++) {
+
+            // Teller igjennom a.
+            for (int j = 0; j < a.length; j++) {
+
+                // Hvis kopi sin indeksverdi er mindre enn minste_verdi (storste_verdi), så settes den til minste_verdi.
+                if (kopi[j] < minste_verdi) {
+                    minste_verdi = kopi[j];
+                    // Indeks settes til minste indeks.
+                    minste_indeks = j;
+                }
+            }
+
+            // Henter neste minste_verdi (storste_verdi).
+            kopi[minste_indeks] = storste_verdi+1;
+
+            // Resetter minste_verdi.
+            minste_verdi = storste_verdi+1;
+
+            // Legger det minste tallet i indeks_a.
+            indeks_a[i] = minste_indeks;
+
+        }
+
+        return indeks_a;
     }
 
     ///// Oppgave 9 //////////////////////////////////////
