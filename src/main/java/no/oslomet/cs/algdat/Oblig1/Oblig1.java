@@ -342,6 +342,8 @@ public class Oblig1 {
     ///// Oppgave 8 //////////////////////////////////////
     public static int[] indekssortering(int[] a) {
         // throw new UnsupportedOperationException();
+        
+        // SKRIV HVILKEN TYPE SORT SOM ER BRUKT
 
         // Hvis tabellen er tom vil teller returnere a uten noen endringer.
         if (a.length == 0) {
