@@ -47,19 +47,4 @@ class Oblig1UnitTest {
     void indekssortering() {
         assertEquals(true, false, "Implementer indekssortering og denne testen");
     }
-
-    @org.junit.jupiter.api.Test
-    void tredjeMin() {
-        assertEquals(true, false, "Implementer tredjeMin og denne testen");
-    }
-
-    @org.junit.jupiter.api.Test
-    void bokstavNr() {
-        assertEquals(true, false, "Implementer bokstavNr og denne testen");
-    }
-
-    @org.junit.jupiter.api.Test
-    void inneholdt() {
-        assertEquals(true, false, "Implementer inneholdt og denne testen");
-    }
 }

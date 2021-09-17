@@ -37,7 +37,6 @@ public class Oblig1 {
 
         }
 
-
     public static int ombyttinger(int[] a) {
         /**
          * Når blir det flest ombyttinger?
@@ -70,7 +69,6 @@ public class Oblig1 {
         return teller;
     }
 
-
     ///// Oppgave 2 //////////////////////////////////////
     public static int antallUlikeSortert(int[] a) {
 
@@ -80,6 +78,7 @@ public class Oblig1 {
          * det 2. tallet i rekken.
          */
 
+        // Lånt elementer fra Programkode 1.1.2 i kompendiet.
         // Oppretter en teller for å telle antall ulike tall. Teller starter på 1 fordi indeks 0 telles ved først
         // sammenlikning i for-løkken under.
         int teller = 1;
@@ -107,9 +106,10 @@ public class Oblig1 {
     ///// Oppgave 3 //////////////////////////////////////
     public static int antallUlikeUsortert(int[] a) {
 
-        /* Oppretter en teller for å telle antall ulike tall. Teller starter på 0 i motsetning til i oppgave 1.
-           I motsettning til oppgave 2 er teller 0 fordi vi kjører en løkke inni en løkke for å sammenlikne tall,
-           uavhengig av rekkefølge på tallene.
+        /**
+         *  En teller blir opprettet for å telle antall ulike tall. Teller starter på 0 i motsetning til i oppgave 1.
+         *  I motsettning til oppgave 2 er teller 0 fordi vi kjører en løkke inni en løkke for å sammenlikne tall,
+         *  uavhengig av rekkefølge på tallene.
          */
         int teller = 0;
 
@@ -121,10 +121,10 @@ public class Oblig1 {
         // Lager en for-løkke som går igjennom tabellen en gang.
         for (int i = 0; i < a.length; i++) {
 
-            // oppretter en markør som registrer om noen tall i tabellen er like.
+            // Oppretter en markør som registrer om noen tall i tabellen er like.
             int markor = 0;
 
-            // En for løkke inni for-løkke som sammenlikner verdi på i og j.
+            // En for-løkke inni for-løkke som sammenlikner verdi på indeks i og j.
             for (int j = 0; j < i; j++) {
                 if (a[i] == a[j]) {
                     markor = 1;
@@ -322,7 +322,7 @@ public class Oblig1 {
             }
         }
 
-        // Initialiserer en tom tegnstreng.
+        // Initialiserer en tom tegnstreng som etterhvert skal fylles.
         String out = "";
 
         // Går igjennom alle tegnene i s.
@@ -341,9 +341,10 @@ public class Oblig1 {
 
     ///// Oppgave 8 //////////////////////////////////////
     public static int[] indekssortering(int[] a) {
-        // throw new UnsupportedOperationException();
-        
-        // SKRIV HVILKEN TYPE SORT SOM ER BRUKT
+        /**
+         * Programkoden i denne oppgaven er basert fra avsnitt 1.3.4 Utvalgssortering,
+         * samt Løsningsforslag - oppgaver i Avsnitt 1.3.4.
+        */
 
         // Hvis tabellen er tom vil teller returnere a uten noen endringer.
         if (a.length == 0) {
@@ -362,12 +363,14 @@ public class Oblig1 {
         int[] indeks_a = new int[a.length];
 
         // Oppretter så en til tabell som er en ny kopi av a for å finne største verdi (16).
+        // Det er lånt en maks() metode fra oppgave 1 for å finne største verdi.
         int storste_verdi = maks(a.clone());
 
-        // Setter minste verdi til å være største verdi (16).
+        // Setter minste_verdi til å foreløpig være_største verdi (16).
         int minste_verdi = storste_verdi;
 
-        // Minste verdi sin indeks er satt til 0.
+        // Minste_verdi sin indeks er satt til 0.
+        // Da får vi den største verdien først (16), som vil gjøre det lettere å sammenlikne og sortere resten.
         int minste_indeks = 0;
 
         // Teller igjennom tabell indeks_a.
@@ -396,20 +399,6 @@ public class Oblig1 {
         }
 
         return indeks_a;
-    }
-
-    ///// Oppgave 9 //////////////////////////////////////
-    public static int[] tredjeMin(int[] a) {
-        throw new UnsupportedOperationException();
-    }
-
-    ///// Oppgave 10 //////////////////////////////////////
-    public static int bokstavNr(char bokstav) {
-        throw new UnsupportedOperationException();
-    }
-
-    public static boolean inneholdt(String a, String b) {
-        throw new UnsupportedOperationException();
     }
 
 }  // Oblig1
