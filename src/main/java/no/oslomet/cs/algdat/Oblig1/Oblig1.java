@@ -11,7 +11,9 @@ import java.util.Random;
 public class Oblig1 {
     private Oblig1() {}
 
-
+    public static void main(String[] args) {
+        System.out.println("hei");
+    }
     ///// Oppgave 1 //////////////////////////////////////
     public static int maks(int[] a) {
 
@@ -78,7 +80,7 @@ public class Oblig1 {
          * det 2. tallet i rekken.
          */
 
-        // Lånt elementer fra Programkode 1.1.2 i kompendiet.
+        // Bygger videre fra metoden i Programkode 1.1.2 i kompendiet.
         // Oppretter en teller for å telle antall ulike tall. Teller starter på 1 fordi indeks 0 telles ved først
         // sammenlikning i for-løkken under.
         int teller = 1;
@@ -89,14 +91,14 @@ public class Oblig1 {
         }
 
         // Lager en for-løkke som går igjennom tabellen en gang for hver indeks.
-        for (int i = 0; i < a.length -1; i++) {
+        for (int i = 0; i < a.length-1 ; i++) {
 
              if (a[i] > a[i+1]) {
                 // Hvis tabellen ikke er sortert stigende, vil man få en feilmelding.
                 throw new IllegalStateException("Tabelllen er ikke sortert stigende.");
 
             // Kun hvis tallet før er mindre enn tallet etter vil teller øke med 1.
-            } else if (a[i] < a[i+1]){
+            } else if (a[i] != a[i+1]){
                 teller ++;
             }
         }

@@ -6,7 +6,6 @@ Oppgaven er levert av følgende studenter:
 * Gro Elisabeth Oleivsgard, S344222, s344222@oslomet.no
 
 # Arbeidsfordeling
-
 I oppgaven har vi hatt følgende arbeidsfordeling:
 * Jenny har hatt hovedansvar for oppgave 2, 3, 7 og 8.
 * Gro har hatt hovedansvar for oppgave 1, 4, 5, og 6.
@@ -16,7 +15,7 @@ I oppgaven har vi hatt følgende arbeidsfordeling:
 
 * I oppgave 2 så brukte vi en ... til å ... *(eksepmel)*
 
-* I oppgave 3 så brukte vi en ... til å ... *(eksepmel)*
+* I oppgave 3 bygget vi videre fra metoden i Programkode 1.1.2 i kompendiet. Istedenfor å returnere maks indeksen, så teller vi heller antall ulike tall. Siden tabellen er i stigende rekkefølge trenger vi bare å gå gjennom tabellen en gang. Teller registreres kun når vi finner et tall som er ulikt det forrige.
 
 * I oppgave 4 så brukte vi en venstre- og høyrepeker (left og right) til å sortere oddetall og partall. I første omgang sjekket vi om arrayet kun inneholdt partall eller kun oddetall med henholdsvise metoder. Metodene brukte modolus-operatoren for å sjekke om arrayet inneholdt partall eller oddetall, og returnerte enten true eller false. Dersmo true ble returnert, brukte vi den innebygde sorteringsalgoritmen til Java, Arrays.sort() for å sortere arrayet i sin helhet. Dersom det ble returnert false fra begge metodene, dvs at arrayet inneholdt både partall og oddetall, brukte vi en for-løkke for å løpe gjennom arrayet. Her ble pekerne brukt til å sjekke hvert tall, om de var oddetall eller partall, med modulus-operatoren. Venstrepeker ble flyttet mot høyre og høyrepeker mot venstre, og arrayet ble på denne måten sortert ved å bruke metoden bytt() til å bytte om verdier til ønsket side. Til slutt ble arrayet sortert i to deler, først fra indeks 0 til og med venstrepekeren (oddetallene), og deretter fra venstrepeker til siste indeks i arrayet (partallene). 
 
@@ -26,11 +25,11 @@ I oppgaven har vi hatt følgende arbeidsfordeling:
 
 * I oppgave 7 så brukte vi en ... til å ... *(eksepmel)*
 
+
 * I oppgave 8 så brukte vi en ... til å ... *(eksepmel)*
 
-**Påminnelse til oss (skal fjernes)**
-* *Beskrivelse av hvordan oppgaven er løst (4-8 linjer/setninger per oppgave) står i
-Readme.md.*
-* *Ingen main-metode eller debug-utskrifter (system.out.println) når den leveres inn.*
+**Annet å bemerke**
+
+* Vi opprettet en MidlertidigMain.java for å teste oppgavene og se riktige verdier som skulle bli skrevet ut.
+* Det oppstod feilmelding med Gradle Test Executor, så oppgave 7a), b) og 8 ble testet utenfor Oblig1.
 * *Warnings er enten beskrevet i readme.md eller fjernet.*
-* *Referer til lånt kildekode fra pensum eller forelesning*
