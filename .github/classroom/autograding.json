@@ -3,17 +3,7 @@
     {
       "name": "Oblig 1 test",
       "setup": "",
-      "run": "gradle test",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": null
-    },
-    {
-      "name": "Tests",
-      "setup": "",
-      "run": "gradle test",
+      "run": "gradle test --tests no.oslomet.cs.algdat.Oblig1.Oblig1Test.*",
       "input": "",
       "output": "",
       "comparison": "included",
